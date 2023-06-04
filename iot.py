@@ -3,7 +3,7 @@
 import time
 import RPi.GPIO as GPIO
 
-TRUE=1
+RUNNING=True
 led1=20
 led2=21
 led3=22
@@ -14,6 +14,7 @@ led7=26
 led8=27
 
 my_led=[led1,led2,led3,led4,led5,led6,led7,led8]
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(led1,GPIO.OUT)
 GPIO.setup(led2,GPIO.OUT)
@@ -26,14 +27,14 @@ GPIO.setup(led8,GPIO.OUT)
 
 def ledstate(led,a):
     GPIO.output(my_led[led],a)
-    
+  
 def off_all():
     for i in range (0,8):
         ledstate(i,1)
     
 try:
     off_all()
-    while TRUE:
+    while RUNNING:
         for i in range(0,8):
             off_all()    
             ledstate(i,1)
@@ -113,11 +114,18 @@ except KeyboardInterrupt:
 a = int(input("Enter the number = "))
 n = a**(1/2)
 print("The square root of the number is : ",n)
+n = a*a
+print("The square of the number is : ",n)
 
 # Q4) Write a program read the temperature sensor and send the values to the serial monitor on the computer
 
 import time
 import os
+
+'''
+os.system('modprobe wl-gpio')
+os.system('modprobe wl-therm')
+'''
 
 base_dir="/sys/bus/w1/devices/28-000008bdd91e/w1_slave"
 
@@ -149,6 +157,11 @@ while True:
 
 import time
 import os
+
+'''
+os.system('modprobe wl-gpio')
+os.system('modprobe wl-therm')
+'''
 
 base_dir="/sys/bus/w1/devices/28-000008bdd91e/w1_slave"
 
@@ -197,6 +210,11 @@ except KeyboardInterrupt:
 import matplotlib.pyplot as plt
 import time
 import os
+
+'''
+os.system('modprobe wl-gpio')
+os.system('modprobe wl-therm')
+'''
 
 base_dir="/sys/bus/w1/devices/28-000008bdd91e/w1_slave"
 
